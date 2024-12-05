@@ -25,6 +25,9 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: test
+        run: ls
+
       #   - name: Set up NVIDIA Container Toolkit
       #     run: |
       #       curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
