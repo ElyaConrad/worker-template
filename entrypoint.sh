@@ -1,20 +1,23 @@
-cd /workspace
+# cd /workspace
 
-echo "Downloading the models..."
-ls -l
+# echo "Downloading the models..."
+# ls -l
 
-if [ ! -f "whisper-large-v3.llamafile" ]; then
-    wget -O whisper-large-v3.llamafile https://huggingface.co/Mozilla/whisperfile/resolve/main/whisper-large-v3.llamafile
-fi
-chmod +x whisper-large-v3.llamafile
+# if [ ! -f "whisper-large-v3.llamafile" ]; then
+#     wget -O whisper-large-v3.llamafile https://huggingface.co/Mozilla/whisperfile/resolve/main/whisper-large-v3.llamafile
+# fi
+# chmod +x whisper-large-v3.llamafile
 
-if [ ! -f "mistral-7b-instruct-v0.2.Q4_0.llamafile" ]; then
-    wget -O mistral-7b-instruct-v0.2.Q4_0.llamafile https://huggingface.co/Mozilla/Mistral-7B-Instruct-v0.2-llamafile/resolve/main/mistral-7b-instruct-v0.2.Q4_0.llamafile
-fi
-chmod +x mistral-7b-instruct-v0.2.Q4_0.llamafile
+# if [ ! -f "mistral-7b-instruct-v0.2.Q4_0.llamafile" ]; then
+#     wget -O mistral-7b-instruct-v0.2.Q4_0.llamafile https://huggingface.co/Mozilla/Mistral-7B-Instruct-v0.2-llamafile/resolve/main/mistral-7b-instruct-v0.2.Q4_0.llamafile
+# fi
+# chmod +x mistral-7b-instruct-v0.2.Q4_0.llamafile
 
-cd ../
+# cd ../
 
+echo Chmod
+chmod +x ./whisper-large-v3.llamafile
+chmod +x ./mistral-7b-instruct-v0.2.Q4_0.llamafile
 
 # Start the server
 echo "Starting the server..."

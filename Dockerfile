@@ -33,10 +33,10 @@ RUN python3.11 -m pip install --upgrade pip && \
     python3.11 -m pip install --upgrade -r /requirements.txt --no-cache-dir && \
     rm /requirements.txt
 
-# RUN wget -O whisper-large-v3.llamafile https://huggingface.co/Mozilla/whisperfile/resolve/main/whisper-large-v3.llamafile
+RUN wget -O whisper-large-v3.llamafile https://huggingface.co/Mozilla/whisperfile/resolve/main/whisper-large-v3.llamafile
 # RUN chmod +x whisper-large-v3.llamafile
 
-# RUN wget -O mistral-7b-instruct-v0.2.Q4_0.llamafile https://huggingface.co/Mozilla/Mistral-7B-Instruct-v0.2-llamafile/resolve/main/mistral-7b-instruct-v0.2.Q4_0.llamafile
+RUN wget -O mistral-7b-instruct-v0.2.Q4_0.llamafile https://huggingface.co/Mozilla/Mistral-7B-Instruct-v0.2-llamafile/resolve/main/mistral-7b-instruct-v0.2.Q4_0.llamafile
 # RUN chmod +x mistral-7b-instruct-v0.2.Q4_0.llamafile
 
 
