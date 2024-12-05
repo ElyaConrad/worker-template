@@ -1,0 +1,48 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Docker build, push & rollout (production)
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: hbck-ai
+  IMAGE_SLUG: latest
+  DOCKER_HUB_USERNAME: elyaconrad
+
+jobs:
+  dockerize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ env.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      #   - name: Set up NVIDIA Container Toolkit
+      #     run: |
+      #       curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
+      #       distribution=$(. /etc/os-release; echo $ID$VERSION_ID)
+      #       curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+      #       sudo apt-get update
+      #       sudo apt-get install -y nvidia-container-toolkit
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./dockerfile
+          push: true
+          tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_SLUG }}
+
+      - name: Cleanup docker environment
+        run: rm -rf /home/runner/.docker/config.json
