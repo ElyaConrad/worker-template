@@ -19,11 +19,22 @@ RUN python3.11 -m pip install --upgrade pip && \
     python3.11 -m pip install --upgrade -r /requirements.txt --no-cache-dir && \
     rm /requirements.txt
 
+RUN apt-get update && apt-get install -y gcc ffmpeg wget
+
+RUN pip install --upgrade pip
+RUN pip install -U openai-whisper
+RUN pip install -U fastapi uvicorn python-multipart
+# pip install -U FlagEmbedding
+RUN pip install infinity-emb[all]
+RUN pip install hapless
+
 # NOTE: The base image comes with multiple Python versions pre-installed.
 #       It is reccommended to specify the version of Python when running your code.
 
 
 # Add src files (Worker Template)
 ADD src .
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD python3.11 -u /handler.py
+CMD ["/entrypoint.sh"]
